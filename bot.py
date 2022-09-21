@@ -26,7 +26,7 @@ except:
 
 if bottoken != None:
     try:
-        BotzHub = TelegramClient("bot", apiid, apihash).start(bot_token=bottoken)
+        infotrackcom = TelegramClient("bot", apiid, apihash).start(bot_token=bottoken)
     except Exception as e:
         print(f"ERROR!\n{str(e)}")
         print("Bot is quiting...")
@@ -39,20 +39,20 @@ else:
 base_url = "https://is.gd/create.php?format=simple&url="
 dagd_url = "https://da.gd/s?url="
 
-@BotzHub.on(events.NewMessage(incoming=True, pattern="^/start$"))
+@infotrackcom.on(events.NewMessage(incoming=True, pattern="^/start$"))
 async def msgg(event):
     await send_start(event, "msg")
 
 
-@BotzHub.on(events.NewMessage(incoming=True, pattern="^/start xx"))
+@infotrackcom.on(events.NewMessage(incoming=True, pattern="^/start xx"))
 async def msgg(event):
     await send_start(event, "msg")
 
 
-@BotzHub.on(events.callbackquery.CallbackQuery(data="help"))
+@infotrackcom.on(events.callbackquery.CallbackQuery(data="help"))
 async def send_help(event):
     await event.edit(
-        "**URL Shortener.**\n\nSend me any URL and I'll shorten it for you!\nJoin @anmolnidhi if you liked this bot!",
+        "**URL Shortener.**\n\nSend me any URL and I'll shorten it for you!\nJoin @infotrackcom if you liked this bot!",
         buttons=[
             [Button.switch_inline("Go Inline", query="", same_peer=True)],
             [Button.inline("« Back", data="bck")],
@@ -60,12 +60,12 @@ async def send_help(event):
     )
 
 
-@BotzHub.on(events.callbackquery.CallbackQuery(data="bck"))
+@infotrackcom.on(events.callbackquery.CallbackQuery(data="bck"))
 async def bk(event):
     await send_start(event, "")
 
 
-@BotzHub.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
+@infotrackcom.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def fn_(event):
     if event.text.startswith("/"):
         return  # ignore commands.
@@ -76,21 +76,21 @@ async def fn_(event):
             Button.inline("da.gd", data=f"d_{event.text}")
         ])
 
-@BotzHub.on(events.callbackquery.CallbackQuery(data=re.compile(b"i_(.*)")))
+@infotrackcom.on(events.callbackquery.CallbackQuery(data=re.compile(b"i_(.*)")))
 async def in_pl(event):
     await event.answer("Processing...")
     tmp = event.data_match.group(1).decode("UTF-8")
     return await event.edit(link_shortener(tmp))
 
 
-@BotzHub.on(events.callbackquery.CallbackQuery(data=re.compile(b"d_(.*)")))
+@infotrackcom.on(events.callbackquery.CallbackQuery(data=re.compile(b"d_(.*)")))
 async def in_pl(event):
     await event.answer("Processing...")
     tmp = event.data_match.group(1).decode("UTF-8")
     return await event.edit(dagd_shrt(tmp))
 
 
-@BotzHub.on(events.InlineQuery)
+@infotrackcom.on(events.InlineQuery)
 async def in_q(event):
     if len(event.text) == 0:
         await event.answer(
@@ -120,14 +120,14 @@ async def in_q(event):
 buttons = [
     [Button.inline("Help", data="help")],
     [
-        Button.url("Channel", url="t.me/anmolnidhi"),
+        Button.url("Channel", url="t.me/infotrackcom"),
         Button.url("Source", url="https://github.com/infotrackcom/link-shortner"),
     ],
 ]
 
 
 async def send_start(event, mode):
-    user_ = await BotzHub.get_entity(event.sender_id)
+    user_ = await infotrackcom.get_entity(event.sender_id)
     if mode == "msg":
         await event.reply(
             f"Hi {user_.first_name}.\n\nI am a URL shortener bot!", buttons=buttons
@@ -163,5 +163,5 @@ def dagd_shrt(url):
         return "404. Not Available."
 
 print("Bot has started.")
-print("Do visit @BotzHub..")
-BotzHub.run_until_disconnected()
+print("Do visit @infotrackcom..")
+infotrackcom.run_until_disconnected()
