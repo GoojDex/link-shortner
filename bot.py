@@ -1,5 +1,5 @@
-# < (c) @xditya >
-# This file is a part of LinkShortener < https://github.com/xditya/LinkShortener >
+# < (c) @infotrackcom >
+# This file is a part of LinkShortener < https://github.com/infotrackcom/link-shortner >
 
 import logging
 from telethon import TelegramClient, events, Button
@@ -52,7 +52,7 @@ async def msgg(event):
 @BotzHub.on(events.callbackquery.CallbackQuery(data="help"))
 async def send_help(event):
     await event.edit(
-        "**URL Shortener.**\n\nSend me any URL and I'll shorten it for you!\nJoin @BotzHub if you liked this bot!",
+        "**URL Shortener.**\n\nSend me any URL and I'll shorten it for you!\nJoin @anmolnidhi if you liked this bot!",
         buttons=[
             [Button.switch_inline("Go Inline", query="", same_peer=True)],
             [Button.inline("« Back", data="bck")],
@@ -120,8 +120,8 @@ async def in_q(event):
 buttons = [
     [Button.inline("Help", data="help")],
     [
-        Button.url("Channel", url="t.me/BotzHub"),
-        Button.url("Source", url="https://github.com/xditya/LinkShortener"),
+        Button.url("Channel", url="t.me/anmolnidhi"),
+        Button.url("Source", url="https://github.com/infotrackcom/link-shortner"),
     ],
 ]
 
