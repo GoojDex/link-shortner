@@ -15,8 +15,8 @@ logging.basicConfig(
 bottoken = None
 # start the bot
 print("Starting...")
-apiid = 6
-apihash = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
+apiid = 12721695
+apihash = "7662bede321ab72cac95a11353473ab2"
 try:
     bottoken = config("BOT_TOKEN")
 except:
